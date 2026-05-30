@@ -1,0 +1,6 @@
+{
+  "name": "ProtoSync API Testing Platform",
+  "description": "Premium futuristic dark-mode developer workspace for ProtoSync, an API testing platform.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
