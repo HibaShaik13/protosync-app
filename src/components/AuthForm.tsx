@@ -161,12 +161,17 @@ export default function AuthForm({ onSuccess, currentMode, onModeChange }: AuthF
         setLoadingStep(steps[currentStepIdx]);
       }
     }, 400);
+const bodyPayload = currentMode === 'login'
+  ? { email, password }
+  : {
+      name: fullName,
+      email,
+      password
+    };
 
-    const bodyPayload = currentMode === 'login'
-      ? { email, password }
-      : { fullName, email, password, workspaceName };
-
-    const endpoint = currentMode === 'login' ? '/api/auth/login' : '/api/auth/register';
+    const endpoint = currentMode === 'login'
+  ? 'https://protosync-backend.onrender.com/api/auth/login'
+  : 'https://protosync-backend.onrender.com/api/auth/signup';
 
     fetch(endpoint, {
       method: 'POST',
@@ -208,7 +213,7 @@ export default function AuthForm({ onSuccess, currentMode, onModeChange }: AuthF
               setLoadingStep('Recovering workspace partition');
               
               // Restore in database
-              const restoreRes = await fetch('/api/auth/register', {
+              const restoreRes = await fetch('https://protosync-backend.onrender.com/api/auth/signup', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -266,7 +271,7 @@ export default function AuthForm({ onSuccess, currentMode, onModeChange }: AuthF
     const simulatedEmail = `social_${provider.toLowerCase()}@protosync.io`;
     const simulatedWorkspace = `ws-${provider.toLowerCase()}`;
 
-    fetch('/api/auth/register', {
+    fetch('https://protosync-backend.onrender.com/api/auth/signup', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -279,7 +284,7 @@ export default function AuthForm({ onSuccess, currentMode, onModeChange }: AuthF
       .then(async (response) => {
         // If registration succeeds or user already exists, trigger login
         if (response.status === 409 || response.ok) {
-          fetch('/api/auth/login', {
+          fetch('https://protosync-backend.onrender.com/api/auth/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({

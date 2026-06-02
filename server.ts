@@ -102,7 +102,7 @@ async function startServer() {
   app.use(express.json());
 
   // API Route: Register
-  app.post("/api/auth/register", (req, res) => {
+  app.post("https://protosync-backend.onrender.com/api/auth/signup", (req, res) => {
     const { fullName, email, password, workspaceName } = req.body;
     if (!fullName || !email || !password) {
       return res.status(400).json({ error: "Missing required fields for registration." });
@@ -162,7 +162,7 @@ async function startServer() {
   });
 
   // API Route: Login
-  app.post("/api/auth/login", (req, res) => {
+  app.post("https://protosync-backend.onrender.com/api/auth/signup", (req, res) => {
     const { email, password } = req.body;
     if (!email || !password) {
       return res.status(400).json({ error: "Please enter your email and password." });
